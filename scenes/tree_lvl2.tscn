@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://do7ir5o4l8pmn"]
+
+[ext_resource type="Texture2D" uid="uid://cwehrthungtb5" path="res://assets/overworld.png" id="1_34gup"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2br71"]
+
+[node name="tree" type="StaticBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_2br71")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0.188235, 1, 1)
+position = Vector2(0, 0.25)
+scale = Vector2(1, 0.966667)
+texture = ExtResource("1_34gup")
+region_enabled = true
+region_rect = Rect2(113, 64, 14, 16.1858)
