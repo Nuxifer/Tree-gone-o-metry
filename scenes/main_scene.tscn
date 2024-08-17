@@ -1,25 +1,64 @@
-[gd_scene load_steps=2 format=3 uid="uid://ccbxveoc345pk"]
+[gd_scene load_steps=4 format=3 uid="uid://ccbxveoc345pk"]
 
+[ext_resource type="Script" path="res://scripts/game_scene.gd" id="1_avj6e"]
 [ext_resource type="PackedScene" uid="uid://isdnnbljo5ld" path="res://scenes/game_scene.tscn" id="1_to420"]
+[ext_resource type="Script" path="res://scenes/Camera2D.gd" id="3_s0lds"]
 
 [node name="MainScene" type="Node2D"]
+script = ExtResource("1_avj6e")
 
 [node name="game_scene" parent="." instance=ExtResource("1_to420")]
 
-[node name="Control" type="Control" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="global_score" type="Label" parent="Control"]
+[node name="city_spawn" type="HSlider" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_top = 19.0
+offset_right = 111.0
+offset_bottom = 35.0
+max_value = 50.0
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/city_spawn"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = -18.0
+offset_right = 41.0
+offset_bottom = 5.0
+text = "City spawn rate"
+
+[node name="tree_spawn" type="HSlider" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_top = 54.0
+offset_right = 111.0
+offset_bottom = 70.0
+max_value = 50.0
+
+[node name="Label2" type="Label" parent="CanvasLayer/Control/tree_spawn"]
+layout_mode = 0
+offset_top = -23.0
+offset_right = 120.0
+text = "Tree spawn rate"
+
+[node name="score" type="Control" parent="CanvasLayer/Control"]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="global_score" type="Label" parent="CanvasLayer/Control/score"]
 unique_name_in_owner = true
 layout_mode = 0
-offset_right = 40.0
+offset_right = 47.0
 offset_bottom = 23.0
 text = "global"
 
-[node name="less_than_5" type="Label" parent="Control"]
+[node name="less_than_5" type="Label" parent="CanvasLayer/Control/score"]
 unique_name_in_owner = true
 layout_mode = 0
 offset_top = 19.0
@@ -27,7 +66,7 @@ offset_right = 40.0
 offset_bottom = 42.0
 text = "<5"
 
-[node name="5_to_10" type="Label" parent="Control"]
+[node name="5_to_10" type="Label" parent="CanvasLayer/Control/score"]
 unique_name_in_owner = true
 layout_mode = 0
 offset_top = 37.0
@@ -35,7 +74,7 @@ offset_right = 40.0
 offset_bottom = 60.0
 text = "5-10"
 
-[node name="10_to_20" type="Label" parent="Control"]
+[node name="10_to_20" type="Label" parent="CanvasLayer/Control/score"]
 unique_name_in_owner = true
 layout_mode = 0
 offset_top = 57.0
@@ -43,7 +82,7 @@ offset_right = 42.0
 offset_bottom = 80.0
 text = "10-20"
 
-[node name="more than 20" type="Label" parent="Control"]
+[node name="more than 20" type="Label" parent="CanvasLayer/Control/score"]
 unique_name_in_owner = true
 layout_mode = 0
 offset_top = 77.0
@@ -51,3 +90,8 @@ offset_right = 40.0
 offset_bottom = 100.0
 text = ">20
 "
+
+[node name="Camera2D" type="Camera2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(575, 326)
+script = ExtResource("3_s0lds")

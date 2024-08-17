@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://56ivgk3tjf36"]
+
+[ext_resource type="Script" path="res://scenes/lake.gd" id="1_afb0a"]
+[ext_resource type="Texture2D" uid="uid://ce8ff83nh3i1f" path="res://assets/Yggrasil_assets_transparent.png" id="2_jnlpk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lj7uy"]
+atlas = ExtResource("2_jnlpk")
+region = Rect2(0, 48, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d14km"]
+atlas = ExtResource("2_jnlpk")
+region = Rect2(0, 72, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6uekh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lj7uy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d14km")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2br71"]
+radius = 95.0053
+
+[node name="lake" type="Area2D" groups=["lakes"]]
+script = ExtResource("1_afb0a")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, 0.25)
+scale = Vector2(1, 0.966667)
+sprite_frames = SubResource("SpriteFrames_6uekh")
+animation = &"new_animation"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_2br71")

@@ -9,8 +9,8 @@ extends Area2D
 @export var city_health: int = 3
 
 func on_new_turn():
+	absorb_levels_from_lake()
 	# Check if the hut consumes trees
-	%Sprite2D.frame = hut_level-1
 	var trees_consumed = consume_trees_in_radius()
 	# If no trees were consumed, reduce city health
 	if not trees_consumed:
@@ -18,6 +18,8 @@ func on_new_turn():
 		hut_level -= 1
 		if city_health <= hut_level:
 			city_health = hut_level
+		if hut_level == 1:
+			city_health = 3
 		print("No trees found near hut at ", global_position, " , remaining health is: ", city_health)
 		if city_health <= 0:
 			print("Hut removed at ", global_position)
@@ -26,8 +28,17 @@ func on_new_turn():
 		# If trees were consumed, reset city health
 		city_health = 3
 		
+	%Sprite2D.frame = hut_level-1
 		
-
+func absorb_levels_from_lake():
+	var overlapping_areas = get_overlapping_areas()
+	for area in overlapping_areas:
+		if area.is_in_group("lakes"):
+			var lake = area
+			var absorbed_level = lake.consume_levels(consumption_rate)  # Settlements absorb levels based on their consumption rate
+			total_consumed += absorbed_level
+			print("Settlement at ", global_position, " absorbed ", absorbed_level, " levels from lake.")
+			
 func consume_trees_in_radius() -> bool:
 	var tree_found = false
 	

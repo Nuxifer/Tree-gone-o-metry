@@ -1,4 +1,4 @@
-extends Node2D
+extends Area2D
 
 @export var tree_level: int = 1  # Initial level value for each tree
 @export var max_tree_level: int = 15  # Max level a tree can reach
@@ -15,8 +15,12 @@ func on_new_turn():
 	# This function is called when a new turn occurs (i.e., when a new tree is placed)
 	if tree_level < max_tree_level:
 		tree_level += 1
-	%Sprite2D.frame = tree_level-1
+	absorb_levels_from_lake()
+	
+	%Sprite2D.frame = tree_level-2
 		#print("Tree level increased to ", tree_level)
+	
+	
 
 	if tree_level >= 3 and not has_spawned_hut:
 		try_to_spawn_hut()
@@ -33,10 +37,20 @@ func on_new_turn():
 		try_to_spawn_tree()
 		try_to_spawn_tree()
 		try_to_spawn_tree()
+	
 
 func try_to_spawn_hut():
 	if randf() <= hut_spawn_chance:
 		spawn_settlement_nearby()
+		
+func absorb_levels_from_lake():
+	var overlapping_areas = get_overlapping_areas()
+	for area in overlapping_areas:
+		if area.is_in_group("lakes"):
+			var lake = area
+			var absorbed_level = lake.consume_levels(1)  # Trees absorb 1 level per turn
+			tree_level += absorbed_level
+			print("Tree at ", global_position, " absorbed ", absorbed_level, " levels from lake.")
 
 func spawn_settlement_nearby():
 	var attempts = 5  # Limit the number of attempts to find a valid position
