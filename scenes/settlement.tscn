@@ -1,20 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://dqd1lmdln20te"]
+[gd_scene load_steps=4 format=3 uid="uid://ctcq5huxrj21a"]
 
-[ext_resource type="Texture2D" uid="uid://cwehrthungtb5" path="res://assets/overworld.png" id="1_1ql6f"]
-[ext_resource type="Script" path="res://scripts/tree.gd" id="1_at8v8"]
+[ext_resource type="Script" path="res://scripts/tree.gd" id="1_qjjbs"]
+[ext_resource type="Texture2D" uid="uid://cwehrthungtb5" path="res://assets/overworld.png" id="2_kf5w5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2br71"]
 radius = 33.1
 
 [node name="tree" type="Node2D"]
-script = ExtResource("1_at8v8")
+script = ExtResource("1_qjjbs")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, 0.25)
 scale = Vector2(1, 0.966667)
-texture = ExtResource("1_1ql6f")
+texture = ExtResource("2_kf5w5")
 region_enabled = true
-region_rect = Rect2(113, 64, 14, 16.1858)
+region_rect = Rect2(241, 96, 14, 14)
 
 [node name="Area2D" type="Area2D" parent="."]
 unique_name_in_owner = true

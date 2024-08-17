@@ -1,22 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://isdnnbljo5ld"]
+[gd_scene load_steps=3 format=3 uid="uid://isdnnbljo5ld"]
 
-[ext_resource type="PackedScene" uid="uid://dqd1lmdln20te" path="res://scenes/tree.tscn" id="1_75naf"]
-[ext_resource type="Script" path="res://scenes/game_scene.gd" id="1_oqf5w"]
-[ext_resource type="PackedScene" uid="uid://gubwnm44b04f" path="res://scenes/yggdrasil.tscn" id="2_w2dqi"]
+[ext_resource type="Script" path="res://scripts/game_scene.gd" id="1_n4w02"]
 
 [sub_resource type="TileSet" id="TileSet_ag44n"]
 
 [node name="game_scene" type="Node2D"]
+script = ExtResource("1_n4w02")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_ag44n")
 format = 2
-script = ExtResource("1_oqf5w")
 
-[node name="yggdrasil" parent="TileMap" instance=ExtResource("2_w2dqi")]
+[node name="Camera2D" type="Camera2D" parent="TileMap"]
 position = Vector2(575, 326)
-
-[node name="Camera2D" type="Camera2D" parent="TileMap/yggdrasil"]
-
-[node name="tree" parent="TileMap" instance=ExtResource("1_75naf")]
-position = Vector2(60, 119)

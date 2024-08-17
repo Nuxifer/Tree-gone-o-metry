@@ -5,3 +5,49 @@
 [node name="MainScene" type="Node2D"]
 
 [node name="game_scene" parent="." instance=ExtResource("1_to420")]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="global_score" type="Label" parent="Control"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "global"
+
+[node name="less_than_5" type="Label" parent="Control"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_top = 19.0
+offset_right = 40.0
+offset_bottom = 42.0
+text = "<5"
+
+[node name="5_to_10" type="Label" parent="Control"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_top = 37.0
+offset_right = 40.0
+offset_bottom = 60.0
+text = "5-10"
+
+[node name="10_to_20" type="Label" parent="Control"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_top = 57.0
+offset_right = 42.0
+offset_bottom = 80.0
+text = "10-20"
+
+[node name="more than 20" type="Label" parent="Control"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_top = 77.0
+offset_right = 40.0
+offset_bottom = 100.0
+text = ">20
+"
