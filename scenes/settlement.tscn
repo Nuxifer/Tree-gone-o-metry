@@ -1,25 +1,65 @@
-[gd_scene load_steps=4 format=3 uid="uid://ctcq5huxrj21a"]
+[gd_scene load_steps=10 format=3 uid="uid://ctcq5huxrj21a"]
 
-[ext_resource type="Script" path="res://scripts/tree.gd" id="1_qjjbs"]
-[ext_resource type="Texture2D" uid="uid://cwehrthungtb5" path="res://assets/overworld.png" id="2_kf5w5"]
+[ext_resource type="Script" path="res://scenes/settlement.gd" id="1_p4xl5"]
+[ext_resource type="Texture2D" uid="uid://ce8ff83nh3i1f" path="res://assets/Yggrasil_assets_transparent.png" id="2_1tjm7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_klh10"]
+atlas = ExtResource("2_1tjm7")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5jtgt"]
+atlas = ExtResource("2_1tjm7")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jvrjr"]
+atlas = ExtResource("2_1tjm7")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8nwxb"]
+atlas = ExtResource("2_1tjm7")
+region = Rect2(96, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7cg0n"]
+atlas = ExtResource("2_1tjm7")
+region = Rect2(120, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6uekh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_klh10")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5jtgt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jvrjr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8nwxb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7cg0n")
+}],
+"loop": true,
+"name": &"growth",
+"speed": 5.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2br71"]
-radius = 33.1
+radius = 43.0116
 
-[node name="tree" type="Node2D"]
-script = ExtResource("1_qjjbs")
+[node name="settlement" type="Area2D" groups=["settlements"]]
+script = ExtResource("1_p4xl5")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(0, 0.25)
 scale = Vector2(1, 0.966667)
-texture = ExtResource("2_kf5w5")
-region_enabled = true
-region_rect = Rect2(241, 96, 14, 14)
+sprite_frames = SubResource("SpriteFrames_6uekh")
+animation = &"growth"
+frame = 3
+frame_progress = 0.368056
 
-[node name="Area2D" type="Area2D" parent="."]
-unique_name_in_owner = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_2br71")
-
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
