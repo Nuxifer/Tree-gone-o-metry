@@ -59,8 +59,8 @@ func consume_tree(tree):
 	if tree.tree_level <= 0:
 		print("Tree at position ", tree.global_position, " has been removed.")
 		var tree_pos = tree.global_position / 16.0
-		if get_parent().occupied_tiles.has(tree_pos):
-			get_parent().occupied_tiles.erase(tree_pos)
+		if Global.occupied_tiles.has(tree_pos):
+			Global.occupied_tiles.erase(tree_pos)
 		get_parent().placed_trees.erase(tree)
 		tree.queue_free()  # Remove the tree if its level reaches 0
 

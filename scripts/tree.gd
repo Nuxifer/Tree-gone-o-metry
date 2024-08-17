@@ -9,12 +9,15 @@ var settlement_scene = preload("res://scenes/settlement.tscn")
 
 @export var has_spawned_hut: bool = false
 
+var growth_factor : int = 1
 
 
 func on_new_turn():
 	# This function is called when a new turn occurs (i.e., when a new tree is placed)
+	
+	
 	if tree_level < max_tree_level:
-		tree_level += 1
+		tree_level += growth_factor
 	absorb_levels_from_lake()
 	
 	%Sprite2D.frame = tree_level-2
@@ -50,7 +53,7 @@ func absorb_levels_from_lake():
 			var lake = area
 			var absorbed_level = lake.consume_levels(1)  # Trees absorb 1 level per turn
 			tree_level += absorbed_level
-			print("Tree at ", global_position, " absorbed ", absorbed_level, " levels from lake.")
+			#print("Tree at ", global_position, " absorbed ", absorbed_level, " levels from lake.")
 
 func spawn_settlement_nearby():
 	var attempts = 5  # Limit the number of attempts to find a valid position
@@ -66,11 +69,11 @@ func spawn_settlement_nearby():
 		var grid_position = potential_position / 16.0
 
 		# Check if the tile is not already occupied
-		if not get_parent().occupied_tiles.has(grid_position):
+		if not Global.occupied_tiles.has(grid_position):
 			var settlement_instance = settlement_scene.instantiate()
 			settlement_instance.global_position = potential_position
-			get_parent().add_child(settlement_instance)
-			get_parent().occupied_tiles[grid_position] = settlement_instance
+			get_node("game_scene/settlements_objects").add_child(settlement_instance)
+			Global.occupied_tiles[grid_position] = settlement_instance
 			has_spawned_hut = true
 			print("Settlement placed at: ", grid_position)
 
@@ -98,17 +101,17 @@ func spawn_tree_nearby():
 		var grid_position = potential_position / 16.0
 
 		# Check if the tile is not already occupied
-		if not get_parent().occupied_tiles.has(grid_position):
+		if not Global.occupied_tiles.has(grid_position):
 			var tree_instance = tree_scene.instantiate()
 			tree_instance.global_position = potential_position
-			get_parent().add_child(tree_instance)
+			get_node("game_scene/trees_objects").add_child(tree_instance)
 
 			# Correctly add the tree to the placed_trees dictionary using the grid position as the key
 			get_parent().placed_trees[grid_position] = tree_instance
-			get_parent().occupied_tiles[grid_position] = tree_instance
+			Global.occupied_tiles[grid_position] = tree_instance
 
 			tree_instance.add_to_group("trees")
-			print("New tree placed at: ", grid_position)
+			#print("New tree placed at: ", grid_position)
 
 			placed = true
 
