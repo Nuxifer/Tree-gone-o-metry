@@ -32,7 +32,8 @@ animations = [{
 }]
 
 [node name="rain_animation" type="AnimatedSprite2D"]
+position = Vector2(12, 12)
 sprite_frames = SubResource("SpriteFrames_ym5ol")
 autoplay = "default"
-frame_progress = 0.745545
+frame_progress = 0.603355
 speed_scale = 0.925

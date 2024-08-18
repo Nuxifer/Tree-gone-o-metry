@@ -26,7 +26,7 @@ func on_new_turn():
 			queue_free()
 	else:
 		# If trees were consumed, reset city health
-		city_health = 3
+		city_health = 2
 		
 	%Sprite2D.frame = hut_level-1
 		
@@ -46,7 +46,7 @@ func consume_trees_in_radius() -> bool:
 		if tree.is_in_group("trees"):
 			consume_tree(tree)
 			tree_found = true
-			city_health = 3
+			city_health = 2
 
 	return tree_found  # Return whether any trees were consumed
 
@@ -62,7 +62,7 @@ func consume_tree(tree):
 		if Global.occupied_tiles.has(tree_pos):
 			Global.occupied_tiles.erase(tree_pos)
 		Global.placed_trees.erase(tree)
-		tree.queue_free()  # Remove the tree if its level reaches 0
+		Global.remove_tree.emit(tree)  # Remove the tree if its level reaches 0
 
 	total_consumed += amount_to_consume
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://ctcq5huxrj21a"]
 
-[ext_resource type="Script" path="res://scenes/settlement.gd" id="1_p4xl5"]
+[ext_resource type="Script" path="res://scripts/settlement.gd" id="1_uv368"]
 [ext_resource type="Texture2D" uid="uid://ce8ff83nh3i1f" path="res://assets/Yggrasil_assets_transparent.png" id="2_1tjm7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_klh10"]
@@ -50,7 +50,7 @@ animations = [{
 radius = 43.0116
 
 [node name="settlement" type="Area2D" groups=["settlements"]]
-script = ExtResource("1_p4xl5")
+script = ExtResource("1_uv368")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true

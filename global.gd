@@ -5,7 +5,10 @@ signal spawn_lake
 signal spawn_settlement
 signal settlement_spawn_rate_changed(value)
 signal tree_spawn_rate_changed(value)
-
+signal fade_in
+signal fade_out
+signal remove_tree
+signal remove_settlement
 
 var occupied_tiles: Dictionary = {}
 
@@ -21,8 +24,10 @@ func _ready():
 	tree_spawn_rate_changed.connect(_on_tree_spawn_rate_changed)
 	settlement_spawn_rate_changed.connect(_on_settlement_spawn_rate_changed)
 
+
 func _on_tree_spawn_rate_changed(value):
 	tree_spawn_chance = value
 func _on_settlement_spawn_rate_changed(value):
 	hut_spawn_chance = value
+
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://56ivgk3tjf36"]
 
-[ext_resource type="Script" path="res://scenes/lake.gd" id="1_afb0a"]
+[ext_resource type="Script" path="res://scripts/lake.gd" id="1_5320k"]
 [ext_resource type="Texture2D" uid="uid://ce8ff83nh3i1f" path="res://assets/Yggrasil_assets_transparent.png" id="2_jnlpk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lj7uy"]
@@ -29,7 +29,7 @@ animations = [{
 radius = 95.0053
 
 [node name="lake" type="Area2D" groups=["lakes"]]
-script = ExtResource("1_afb0a")
+script = ExtResource("1_5320k")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true

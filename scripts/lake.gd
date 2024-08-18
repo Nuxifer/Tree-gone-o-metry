@@ -62,15 +62,3 @@ func find_valid_spawn_position() -> Vector2:
 	
 	return Vector2(-1,-1)  # Return null if no valid position was found
 #
-#func spawn_tree(spawn_position: Vector2):
-	#var tree_instance = tree_scene.instantiate()
-	#get_node("game_scene/trees_objects").add_child(tree_instance)
-	#tree_instance.global_position = spawn_position
-#
-	## Add the tree to the occupied tiles dictionary in the parent scene
-	#var grid_position = Vector2i(spawn_position / tile_size)
-	#Global.occupied_tiles[grid_position] = tree_instance
-	#get_parent().placed_trees[grid_position] = tree_instance
-	#tree_instance.add_to_group("trees")
-#
-	#print("Tree spawned at: ", spawn_position)

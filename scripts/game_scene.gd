@@ -6,6 +6,9 @@ var settlement_scene = preload("res://scenes/settlement.tscn")
 @export var tile_size: float = 16.0
 var tilemap : TileMap
 
+# Load the ObjectPool script
+@onready var ObjectPool = preload("res://scenes/object_pool.tscn")
+@onready var object_pool = ObjectPool.instantiate()
 
 # Rain system
 @export var rain_intervals: Array[int] = []
@@ -34,6 +37,15 @@ var lake_scene = preload("res://scenes/lake.tscn")  # Reference to the lake scen
 
 func _ready():
 	place_lakes_randomly()
+	# Assuming ObjectPool.gd is a script attached to a Node in the scene
+	
+	add_child(object_pool)
+	
+	
+	object_pool.tree_scene = tree_scene
+	object_pool.settlement_scene = settlement_scene
+	object_pool.pool_size = 100
+	
 	tilemap = %TileMap
 	# Ensure the camera node is assigned
 	if camera == null:
@@ -41,6 +53,8 @@ func _ready():
 	camera.make_current()
 	Global.spawn_tree.connect(place_tree)
 	Global.spawn_settlement.connect(place_settlement)
+	Global.remove_tree.connect(remove_tree)
+	Global.remove_settlement.connect(remove_settlement)
 
 	# Initialize the rain intervals array with 100 random numbers between 2 and 5
 	rain_intervals.resize(max_turns)
@@ -73,26 +87,39 @@ func _input(event: InputEvent):
 		# Try to place a tree at the calculated position
 		if place_tree(world_position):
 			process_turn()
-
 func place_tree(global_position: Vector2) -> bool:
 	# Convert the global position to the nearest grid position
 	var tile_position = global_position.snapped(Vector2(tile_size, tile_size))
 	var grid_position = Vector2i(tile_position / tile_size)
 
+	# Check if the position is already occupied
 	if Global.occupied_tiles.has(grid_position):
 		print("Tile at ", grid_position, " is already occupied. Cannot place tree.")
 		return false
 
-	var tree_instance = tree_scene.instantiate()
+	# Get a tree instance from the object pool
+	var tree_instance = object_pool.get_tree_instance()
+
+	# Add the tree instance to the scene and set its position
 	trees_objects.add_child(tree_instance)
 	tree_instance.global_position = tile_position
 
+	# Update the global dictionaries
 	Global.occupied_tiles[grid_position] = tree_instance
-	Global.placed_trees[grid_position] = tree_instance  # Store the tree in the dictionary
+	Global.placed_trees[grid_position] = tree_instance
+
+	# Add the tree to the "trees" group
 	tree_instance.add_to_group("trees")
 
-	#print("Tree placed at: ", grid_position)
+	# Optionally, print the tree placement for debugging
+	print("Tree placed at: ", grid_position)
+
 	return true  # Tree was successfully placed
+
+
+
+func remove_tree(tree_instance: Node):
+	object_pool.return_tree_instance(tree_instance)
 
 func place_settlement(global_position: Vector2) -> bool:
 	# Convert the global position to the nearest grid position
@@ -101,27 +128,32 @@ func place_settlement(global_position: Vector2) -> bool:
 
 	# Check if the grid position is already occupied
 	if Global.occupied_tiles.has(grid_position):
-		#print("Tile at ", grid_position, " is already occupied. Cannot place settlement.")
+		print("Tile at ", grid_position, " is already occupied. Cannot place settlement.")
 		return false
 
-	# Instantiate the settlement
-	var settlement_instance = settlement_scene.instantiate()
+	# Get a settlement instance from the object pool
+	var settlement_instance = object_pool.get_settlement_instance()
 	
-	# Add the settlement to the settlements group or scene tree
+	# Add the settlement to the scene and set its position
 	settlements_objects.add_child(settlement_instance)
 	settlement_instance.global_position = tile_position
 
-	# Mark the tile as occupied in the occupied_tiles dictionary
+	# Update the global dictionaries
 	Global.occupied_tiles[grid_position] = settlement_instance
+	Global.placed_settlements[grid_position] = settlement_instance
 
-	# If you have a separate dictionary for settlements, use it
-	Global.placed_settlements[grid_position] = settlement_instance  # Store the settlement in the correct dictionary
-
+	# Add the settlement to the "settlements" group
 	settlement_instance.add_to_group("settlements")
 
-	#print("Settlement placed at: ", grid_position)
+	# Optionally, print the settlement placement for debugging
+	print("Settlement placed at: ", grid_position)
+
 	return true  # Settlement was successfully placed
 
+
+func remove_settlement(settlement_instance: Node):
+	object_pool.return_settlement_instance(settlement_instance)
+	
 func place_lakes_randomly():
 	for i in range(number_of_lakes):
 		var random_x = randi_range(-placement_range, placement_range)
@@ -156,9 +188,11 @@ func process_turn():
 	if turn_count == rain_intervals[rain_cycle_index]:
 		if is_raining:
 			print("Rain has stopped.")
+			Global.fade_out.emit()
 			is_raining = false
 		else:
 			print("It's starting to rain!")
+			Global.fade_in.emit()
 			is_raining = true
 
 		# Move to the next interval and reset the turn count
@@ -170,6 +204,7 @@ func process_turn():
 		apply_rain_effects()
 
 	# Normal tree growth if it's not raining
+
 	apply_normal_growth()
 	
 	
@@ -192,6 +227,7 @@ func process_turn():
 		settlement.on_new_turn()
 
 func apply_rain_effects():
+	
 	# Double the growth rate of trees during rain
 	for tree in get_tree().get_nodes_in_group("trees"):
 		tree.growth_factor = 2  

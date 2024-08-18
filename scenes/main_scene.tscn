@@ -1,14 +1,70 @@
-[gd_scene load_steps=4 format=3 uid="uid://ccbxveoc345pk"]
+[gd_scene load_steps=8 format=3 uid="uid://ccbxveoc345pk"]
 
-[ext_resource type="Script" path="res://scenes/main_scene_ui.gd" id="1_0ide8"]
+[ext_resource type="Script" path="res://scripts/main_scene_ui.gd" id="1_0ide8"]
 [ext_resource type="PackedScene" uid="uid://isdnnbljo5ld" path="res://scenes/game_scene.tscn" id="1_to420"]
+[ext_resource type="PackedScene" uid="uid://b5ogqos03jant" path="res://scenes/object_pool.tscn" id="3_32m5m"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_r7adw"]
+[sub_resource type="Animation" id="Animation_as55k"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Control/rain_container:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_c0kv4"]
+resource_name = "fade_in"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Control/rain_container:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_fkr17"]
+resource_name = "fade_out"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Control/rain_container:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wn1if"]
+_data = {
+"RESET": SubResource("Animation_as55k"),
+"fade_in": SubResource("Animation_c0kv4"),
+"fade_out": SubResource("Animation_fkr17")
+}
 
 [node name="MainScene" type="Node2D"]
 script = ExtResource("1_0ide8")
 
 [node name="game_scene" parent="." instance=ExtResource("1_to420")]
+
+[node name="object_pool" parent="game_scene" instance=ExtResource("3_32m5m")]
+unique_name_in_owner = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -17,41 +73,6 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-
-[node name="city_spawn" type="HSlider" parent="CanvasLayer/Control"]
-unique_name_in_owner = true
-layout_mode = 0
-offset_top = 19.0
-offset_right = 111.0
-offset_bottom = 35.0
-max_value = 10.0
-step = 0.1
-
-[node name="city_label" type="Label" parent="CanvasLayer/Control/city_spawn"]
-unique_name_in_owner = true
-layout_mode = 0
-offset_left = 1.0
-offset_top = -18.0
-offset_right = 184.0
-offset_bottom = 5.0
-text = "City spawn rate"
-
-[node name="tree_spawn" type="HSlider" parent="CanvasLayer/Control"]
-unique_name_in_owner = true
-layout_mode = 0
-offset_left = 3.0
-offset_top = 51.0
-offset_right = 114.0
-offset_bottom = 67.0
-max_value = 50.0
-step = 0.1
-
-[node name="tree_label" type="Label" parent="CanvasLayer/Control/tree_spawn"]
-unique_name_in_owner = true
-layout_mode = 0
-offset_top = -23.0
-offset_right = 181.0
-text = "Tree spawn rate"
 
 [node name="score" type="Control" parent="CanvasLayer/Control"]
 visible = false
@@ -99,10 +120,78 @@ offset_bottom = 100.0
 text = ">20
 "
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer"]
-sprite_frames = SubResource("SpriteFrames_r7adw")
+[node name="rain_container" type="Control" parent="CanvasLayer/Control"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 0
+mouse_filter = 2
 
-[connection signal="value_changed" from="CanvasLayer/Control/city_spawn" to="." method="_on_city_spawn_value_changed"]
-[connection signal="value_changed" from="CanvasLayer/Control/tree_spawn" to="." method="_on_tree_spawn_value_changed"]
+[node name="camera_limits" type="Control" parent="CanvasLayer/Control"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="upper_left" type="Marker2D" parent="CanvasLayer/Control/camera_limits"]
+position = Vector2(-5000, -5000)
+
+[node name="upper_right" type="Marker2D" parent="CanvasLayer/Control/camera_limits"]
+position = Vector2(5000, -5000)
+
+[node name="lower_right" type="Marker2D" parent="CanvasLayer/Control/camera_limits"]
+position = Vector2(5000, 5000)
+
+[node name="lower_left" type="Marker2D" parent="CanvasLayer/Control/camera_limits"]
+position = Vector2(-5000, 5000)
+
+[node name="sliders" type="Control" parent="CanvasLayer/Control"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="city_spawn" type="HSlider" parent="CanvasLayer/Control/sliders"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_top = 19.0
+offset_right = 111.0
+offset_bottom = 35.0
+focus_mode = 0
+max_value = 0.5
+step = 0.001
+
+[node name="city_label" type="Label" parent="CanvasLayer/Control/sliders/city_spawn"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 1.0
+offset_top = -18.0
+offset_right = 184.0
+offset_bottom = 5.0
+text = "City spawn rate"
+
+[node name="tree_spawn" type="HSlider" parent="CanvasLayer/Control/sliders"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 3.0
+offset_top = 51.0
+offset_right = 114.0
+offset_bottom = 67.0
+focus_mode = 0
+max_value = 1.0
+step = 0.01
+
+[node name="tree_label" type="Label" parent="CanvasLayer/Control/sliders/tree_spawn"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_top = -23.0
+offset_right = 181.0
+text = "Tree spawn rate"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_wn1if")
+}
+
+[connection signal="value_changed" from="CanvasLayer/Control/sliders/city_spawn" to="." method="_on_city_spawn_value_changed"]
+[connection signal="value_changed" from="CanvasLayer/Control/sliders/tree_spawn" to="." method="_on_tree_spawn_value_changed"]
 
 [editable path="game_scene"]

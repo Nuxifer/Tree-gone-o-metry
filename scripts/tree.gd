@@ -98,25 +98,6 @@ func spawn_tree_nearby():
 		var potential_position = global_position + offset
 		Global.spawn_tree.emit(potential_position)
 		placed = true
-#
-		## Snap the potential position to the grid
-		#potential_position = potential_position.snapped(Vector2(16, 16))
-#
-		#var grid_position = potential_position / 16.0
-#
-		## Check if the tile is not already occupied
-		#if not Global.occupied_tiles.has(grid_position):
-			#var tree_instance = tree_scene.instantiate()
-			#tree_instance.global_position = potential_position
-			#get_node("game_scene/trees_objects").add_child(tree_instance)
-#
-			## Correctly add the tree to the placed_trees dictionary using the grid position as the key
-			#get_parent().placed_trees[grid_position] = tree_instance
-			#Global.occupied_tiles[grid_position] = tree_instance
-#
-			#tree_instance.add_to_group("trees")
-			##print("New tree placed at: ", grid_position)
-#
 
 		attempts -= 1
 
