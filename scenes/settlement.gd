@@ -20,7 +20,7 @@ func on_new_turn():
 			city_health = hut_level
 		if hut_level == 1:
 			city_health = 3
-		print("No trees found near hut at ", global_position, " , remaining health is: ", city_health)
+		#print("No trees found near hut at ", global_position, " , remaining health is: ", city_health)
 		if city_health <= 0:
 			print("Hut removed at ", global_position)
 			queue_free()
@@ -37,7 +37,7 @@ func absorb_levels_from_lake():
 			var lake = area
 			var absorbed_level = lake.consume_levels(consumption_rate)  # Settlements absorb levels based on their consumption rate
 			total_consumed += absorbed_level
-			print("Settlement at ", global_position, " absorbed ", absorbed_level, " levels from lake.")
+			#print("Settlement at ", global_position, " absorbed ", absorbed_level, " levels from lake.")
 			
 func consume_trees_in_radius() -> bool:
 	var tree_found = false
@@ -54,14 +54,14 @@ func consume_tree(tree):
 	var amount_to_consume = consumption_rate
 
 	tree.tree_level -= amount_to_consume
-	print("Consumed ", amount_to_consume, " points from tree. New tree level: ", tree.tree_level)
+	#print("Consumed ", amount_to_consume, " points from tree. New tree level: ", tree.tree_level)
 
 	if tree.tree_level <= 0:
 		print("Tree at position ", tree.global_position, " has been removed.")
 		var tree_pos = tree.global_position / 16.0
 		if Global.occupied_tiles.has(tree_pos):
 			Global.occupied_tiles.erase(tree_pos)
-		get_parent().placed_trees.erase(tree)
+		Global.placed_trees.erase(tree)
 		tree.queue_free()  # Remove the tree if its level reaches 0
 
 	total_consumed += amount_to_consume

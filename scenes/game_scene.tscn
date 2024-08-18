@@ -33,6 +33,11 @@ position = Vector2(1151, 5)
 [node name="Camera2D" type="Camera2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(575, 326)
+limit_left = -10000
+limit_top = -10000
+limit_right = 10000
+limit_bottom = 10000
+limit_smoothed = true
 script = ExtResource("2_cxr33")
 
 [node name="lake_objects" type="Node2D" parent="."]
