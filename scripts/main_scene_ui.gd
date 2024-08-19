@@ -11,6 +11,7 @@ var animation_player
 func _ready():
 	Global.fade_in.connect(_on_fade_in)
 	Global.fade_out.connect(_on_fade_out)
+	Global.click_sound.connect(play_click_sound)
 	%rain_container.modulate = Color(1,1,1,0)
 	# Get the size of the screen
 	var screen_size = get_viewport().get_visible_rect().size
@@ -63,3 +64,7 @@ func _on_start_pressed():
 
 func _on_quit_pressed():
 	get_tree().quit()
+
+
+func play_click_sound():
+	%click.play()

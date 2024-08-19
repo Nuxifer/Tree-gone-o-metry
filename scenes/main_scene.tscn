@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://ccbxveoc345pk"]
+[gd_scene load_steps=15 format=3 uid="uid://ccbxveoc345pk"]
 
 [ext_resource type="Script" path="res://scripts/main_scene_ui.gd" id="1_0ide8"]
 [ext_resource type="PackedScene" uid="uid://isdnnbljo5ld" path="res://scenes/game_scene.tscn" id="1_to420"]
@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://c6i4byg1fxg0e" path="res://assets/start_hover.png" id="6_stemu"]
 [ext_resource type="Texture2D" uid="uid://cr20jrot1b7ii" path="res://assets/exit_normal.png" id="7_7jqvx"]
 [ext_resource type="Texture2D" uid="uid://cj3xgf04yyl3g" path="res://assets/exit_hover.png" id="8_bv86p"]
+[ext_resource type="AudioStream" uid="uid://p560xmw1lacu" path="res://assets/Whispers of Rain.mp3" id="9_ccsls"]
+[ext_resource type="AudioStream" uid="uid://c8hia35ju5y61" path="res://assets/Plop - Interface Sounds Starter Pack by P0ss.wav" id="10_p5k4x"]
 
 [sub_resource type="Animation" id="Animation_as55k"]
 length = 0.001
@@ -179,6 +181,14 @@ unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_wn1if")
 }
+
+[node name="bg_music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_ccsls")
+autoplay = true
+
+[node name="click" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("10_p5k4x")
 
 [connection signal="value_changed" from="CanvasLayer/Control/sliders/city_spawn" to="." method="_on_city_spawn_value_changed"]
 [connection signal="value_changed" from="CanvasLayer/Control/sliders/tree_spawn" to="." method="_on_tree_spawn_value_changed"]

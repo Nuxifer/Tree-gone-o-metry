@@ -100,3 +100,9 @@ script = SubResource("GDScript_1ku43")
 [node name="settlements_objects" type="Node2D" parent="."]
 
 [node name="mountains_objects" type="Node2D" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.6
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

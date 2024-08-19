@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c8hia35ju5y61"
+path="res://.godot/imported/Plop - Interface Sounds Starter Pack by P0ss.wav-a57b0d4d46cc6f614de6f0ac42db8d79.sample"
+
+[deps]
+
+source_file="res://assets/Plop - Interface Sounds Starter Pack by P0ss.wav"
+dest_files=["res://.godot/imported/Plop - Interface Sounds Starter Pack by P0ss.wav-a57b0d4d46cc6f614de6f0ac42db8d79.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -9,6 +9,7 @@ signal fade_in
 signal fade_out
 signal remove_tree
 signal remove_settlement
+signal click_sound
 
 var occupied_tiles: Dictionary = {}
 

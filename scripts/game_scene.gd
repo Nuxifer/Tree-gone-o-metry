@@ -38,6 +38,8 @@ var settlement_index = 0
 @onready var settlements_objects = $settlements_objects
 @onready var mountains_objects = $mountains_objects
 
+var can_click : bool = true
+
 func _ready():
 	place_lakes_randomly()
 	place_mountains_randomly()
@@ -84,7 +86,10 @@ func _process(delta: float):
 		camera.position += move_vector
 		
 func _input(event: InputEvent):
-	if Input.is_action_pressed("left_click") and event is InputEventMouseButton:
+	if Input.is_action_pressed("left_click") and event is InputEventMouseButton and can_click:
+		can_click = false
+		%Timer.start()
+		Global.click_sound.emit()
 		# Convert the mouse position to world coordinates
 		var world_position = camera.get_global_mouse_position()
 
@@ -357,3 +362,7 @@ func apply_normal_growth():
 		
 
 
+
+
+func _on_timer_timeout():
+	can_click = true # Replace with function body.
