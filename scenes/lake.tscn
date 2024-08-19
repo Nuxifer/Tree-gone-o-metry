@@ -1,24 +1,52 @@
-[gd_scene load_steps=7 format=3 uid="uid://56ivgk3tjf36"]
+[gd_scene load_steps=11 format=3 uid="uid://56ivgk3tjf36"]
 
 [ext_resource type="Script" path="res://scripts/lake.gd" id="1_5320k"]
-[ext_resource type="Texture2D" uid="uid://ce8ff83nh3i1f" path="res://assets/Yggrasil_assets_transparent.png" id="2_jnlpk"]
+[ext_resource type="Texture2D" uid="uid://mp83cxcqd5c6" path="res://assets/Project_Wood_no_grass.png" id="2_thqxu"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_lj7uy"]
-atlas = ExtResource("2_jnlpk")
+[sub_resource type="AtlasTexture" id="AtlasTexture_dwt6k"]
+atlas = ExtResource("2_thqxu")
 region = Rect2(0, 48, 24, 24)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_d14km"]
-atlas = ExtResource("2_jnlpk")
+[sub_resource type="AtlasTexture" id="AtlasTexture_ip3bs"]
+atlas = ExtResource("2_thqxu")
 region = Rect2(0, 72, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yqmta"]
+atlas = ExtResource("2_thqxu")
+region = Rect2(24, 48, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cxah1"]
+atlas = ExtResource("2_thqxu")
+region = Rect2(24, 72, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rl07s"]
+atlas = ExtResource("2_thqxu")
+region = Rect2(48, 48, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2jbko"]
+atlas = ExtResource("2_thqxu")
+region = Rect2(48, 72, 24, 24)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_6uekh"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_lj7uy")
+"texture": SubResource("AtlasTexture_dwt6k")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_d14km")
+"texture": SubResource("AtlasTexture_ip3bs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yqmta")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cxah1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rl07s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2jbko")
 }],
 "loop": true,
 "name": &"new_animation",
@@ -26,7 +54,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2br71"]
-radius = 95.0053
+radius = 51.0392
 
 [node name="lake" type="Area2D" groups=["lakes"]]
 script = ExtResource("1_5320k")

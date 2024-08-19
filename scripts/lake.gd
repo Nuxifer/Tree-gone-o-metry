@@ -8,8 +8,42 @@ var tree_scene = preload("res://scenes/tree.tscn") # Reference to the tree scene
 
 var tile_size: float = 16.0  # Size of each tile (for snapping and placement)
 var placement_range: int = 5  # Range within which to spawn trees (in tiles)
+var graphic_index : int = 0
 
+func _ready():
+	graphic_index = randi_range(0,2)
+	set_graphics(graphic_index)
 
+func set_graphics(value):
+	match value:
+		0:
+			%Sprite2D.frame = 1
+		1:
+			%Sprite2D.frame = 3
+		2:
+			%Sprite2D.frame = 5
+	
+
+func change_graphics(value):
+	match value:
+		0:
+			if current_level == 0:
+				%Sprite2D.frame = 0
+			else:
+				%Sprite2D.frame = 1
+		
+		1:
+			if current_level == 0:
+				%Sprite2D.frame = 2
+			else:
+				%Sprite2D.frame = 3
+		2:
+			if current_level == 0:
+				%Sprite2D.frame = 4
+			else:
+				%Sprite2D.frame = 5
+	
+	
 func on_new_turn(is_raining: bool):
 	if is_raining:
 		refill_levels()
@@ -19,17 +53,12 @@ func consume_levels(amount: int) -> int:
 	# If the lake doesn't have enough levels, it will only provide what's available
 	var consumed = min(amount, current_level)
 	current_level -= consumed
-	change_graphics()
+	change_graphics(graphic_index)
 	return consumed
 
 func refill_levels():
 	current_level = max_level
-
-func change_graphics():
-	if current_level == 0:
-		%Sprite2D.frame = 1
-	else:
-		%Sprite2D.frame = 0
+	change_graphics(graphic_index)
 
 func try_to_spawn_tree():
 	# Roll for a chance to spawn a tree

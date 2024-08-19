@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://b7qfapfyh5nj6"]
+
+[ext_resource type="Texture2D" uid="uid://mp83cxcqd5c6" path="res://assets/Project_Wood_no_grass.png" id="2_jtqx2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2br71"]
+radius = 95.0053
+
+[node name="mountain" type="Area2D" groups=["mountain"]]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, 0.25)
+scale = Vector2(1, 0.966667)
+texture = ExtResource("2_jtqx2")
+region_enabled = true
+region_rect = Rect2(120, 49, 24, 21)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_2br71")

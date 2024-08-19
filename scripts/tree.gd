@@ -32,13 +32,12 @@ func on_new_turn():
 	
 	if tree_level >= 10:
 		try_to_spawn_tree()
-		try_to_spawn_tree()
+
 	
 	
 	if tree_level >= 15:
 		try_to_spawn_tree()
-		try_to_spawn_tree()
-		try_to_spawn_tree()
+		
 	
 
 func try_to_spawn_hut():
@@ -78,7 +77,8 @@ func spawn_settlement_nearby():
 			placed = true  # Mark as placed to stop further attempts
 			#print("Settlement placed at: ", grid_position)
 		else:
-			print("Tile at ", grid_position, " is already occupied.")
+			pass
+			#print("Tile at ", grid_position, " is already occupied.")
 
 		attempts -= 1  # Decrease the attempt count after each try
 

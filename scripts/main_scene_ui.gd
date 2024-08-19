@@ -16,7 +16,7 @@ func _ready():
 	#var screen_size = get_viewport().get_visible_rect().size
 	
 	# Assuming your AnimatedSprite2D has a size of 64x64 pixels
-	var sprite_size = Vector2(24, 24)  # Replace with your actual sprite size
+	var sprite_size = Vector2(48, 48)  # Replace with your actual sprite size
 	
 	# Calculate how many sprites are needed to cover the screen
 	var columns = int(ceil(screen_size.x / sprite_size.x))
