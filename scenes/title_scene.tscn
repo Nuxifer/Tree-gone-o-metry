@@ -1,12 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://dxuujeimhl7ma"]
+[gd_scene load_steps=6 format=3 uid="uid://dxuujeimhl7ma"]
 
 [ext_resource type="Texture2D" uid="uid://btnya154xnmvp" path="res://assets/Project_Wood_grass.png" id="1_gya20"]
 [ext_resource type="Script" path="res://scenes/title_scene.gd" id="1_iy7wu"]
 [ext_resource type="Texture2D" uid="uid://v28xgdta0jog" path="res://assets/title.png" id="2_06h2r"]
-[ext_resource type="Texture2D" uid="uid://dv3b8m1oleltb" path="res://assets/start_normal.png" id="3_2n8uf"]
-[ext_resource type="Texture2D" uid="uid://c6i4byg1fxg0e" path="res://assets/start_hover.png" id="4_ntq26"]
-[ext_resource type="Texture2D" uid="uid://cr20jrot1b7ii" path="res://assets/exit_normal.png" id="5_2lkiw"]
-[ext_resource type="Texture2D" uid="uid://cj3xgf04yyl3g" path="res://assets/exit_hover.png" id="6_ifg7p"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ojyr5"]
 texture = ExtResource("1_gya20")
@@ -15,28 +11,16 @@ texture_region_size = Vector2i(24, 24)
 5:0/0 = 0
 6:0/0 = 0
 7:0/0 = 0
-8:0/0 = 0
-9:0/0 = 0
-10:0/0 = 0
-11:0/0 = 0
 3:1/0 = 0
 4:1/0 = 0
 5:1/0 = 0
 6:1/0 = 0
 7:1/0 = 0
-8:1/0 = 0
-9:1/0 = 0
-10:1/0 = 0
-11:1/0 = 0
 3:2/0 = 0
 4:2/0 = 0
 5:2/0 = 0
 6:2/0 = 0
 7:2/0 = 0
-8:2/0 = 0
-9:2/0 = 0
-10:2/0 = 0
-11:2/0 = 0
 0:3/0 = 0
 1:3/0 = 0
 2:3/0 = 0
@@ -45,20 +29,12 @@ texture_region_size = Vector2i(24, 24)
 5:3/0 = 0
 6:3/0 = 0
 7:3/0 = 0
-8:3/0 = 0
-9:3/0 = 0
-10:3/0 = 0
-11:3/0 = 0
 0:4/0 = 0
 1:4/0 = 0
 4:4/0 = 0
 5:4/0 = 0
 6:4/0 = 0
 7:4/0 = 0
-8:4/0 = 0
-9:4/0 = 0
-10:4/0 = 0
-11:4/0 = 0
 0:5/0 = 0
 1:5/0 = 0
 2:5/0 = 0
@@ -66,10 +42,6 @@ texture_region_size = Vector2i(24, 24)
 5:5/0 = 0
 6:5/0 = 0
 7:5/0 = 0
-8:5/0 = 0
-9:5/0 = 0
-10:5/0 = 0
-11:5/0 = 0
 0:6/0 = 0
 1:6/0 = 0
 2:6/0 = 0
@@ -78,46 +50,6 @@ texture_region_size = Vector2i(24, 24)
 5:6/0 = 0
 6:6/0 = 0
 7:6/0 = 0
-8:6/0 = 0
-9:6/0 = 0
-10:6/0 = 0
-11:6/0 = 0
-0:7/0 = 0
-1:7/0 = 0
-2:7/0 = 0
-3:7/0 = 0
-4:7/0 = 0
-5:7/0 = 0
-6:7/0 = 0
-7:7/0 = 0
-8:7/0 = 0
-9:7/0 = 0
-10:7/0 = 0
-11:7/0 = 0
-0:8/0 = 0
-1:8/0 = 0
-2:8/0 = 0
-3:8/0 = 0
-4:8/0 = 0
-5:8/0 = 0
-6:8/0 = 0
-7:8/0 = 0
-8:8/0 = 0
-9:8/0 = 0
-10:8/0 = 0
-11:8/0 = 0
-0:9/0 = 0
-1:9/0 = 0
-2:9/0 = 0
-3:9/0 = 0
-4:9/0 = 0
-5:9/0 = 0
-6:9/0 = 0
-7:9/0 = 0
-8:9/0 = 0
-9:9/0 = 0
-10:9/0 = 0
-11:9/0 = 0
 3:0/0 = 0
 2:1/0 = 0
 0:2/0 = 0
@@ -132,14 +64,14 @@ tile_size = Vector2i(24, 24)
 sources/0 = SubResource("TileSetAtlasSource_ojyr5")
 
 [node name="title_scene" type="Node2D"]
-script = ExtResource("1_iy7wu")
 
 [node name="background" type="TextureRect" parent="."]
 unique_name_in_owner = true
-offset_left = -45.0
-offset_top = -27.0
-offset_right = 1916.0
-offset_bottom = 663.0
+offset_left = 1.0
+offset_top = 3.0
+offset_right = 1962.0
+offset_bottom = 693.0
+script = ExtResource("1_iy7wu")
 
 [node name="TileMap" type="TileMap" parent="background"]
 tile_set = SubResource("TileSet_5y1u6")
@@ -151,28 +83,10 @@ offset_right = 1155.0
 offset_bottom = 350.0
 texture = ExtResource("2_06h2r")
 
-[node name="start" type="TextureButton" parent="."]
-offset_left = 530.0
-offset_top = 361.0
-offset_right = 617.0
-offset_bottom = 376.0
-texture_normal = ExtResource("3_2n8uf")
-texture_pressed = ExtResource("4_ntq26")
-texture_hover = ExtResource("4_ntq26")
-
-[node name="quit" type="TextureButton" parent="."]
-offset_left = 547.0
-offset_top = 403.0
-offset_right = 612.0
-offset_bottom = 417.0
-texture_normal = ExtResource("5_2lkiw")
-texture_pressed = ExtResource("6_ifg7p")
-texture_hover = ExtResource("6_ifg7p")
-
 [node name="left" type="Marker2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(-902, 574)
+position = Vector2(-763, 1)
 
 [node name="right" type="Marker2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(2699, 611)
+position = Vector2(-1, 5)

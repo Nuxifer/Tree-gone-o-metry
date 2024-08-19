@@ -1,8 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://ccbxveoc345pk"]
+[gd_scene load_steps=13 format=3 uid="uid://ccbxveoc345pk"]
 
 [ext_resource type="Script" path="res://scripts/main_scene_ui.gd" id="1_0ide8"]
 [ext_resource type="PackedScene" uid="uid://isdnnbljo5ld" path="res://scenes/game_scene.tscn" id="1_to420"]
 [ext_resource type="PackedScene" uid="uid://b5ogqos03jant" path="res://scenes/object_pool.tscn" id="3_32m5m"]
+[ext_resource type="PackedScene" uid="uid://dxuujeimhl7ma" path="res://scenes/title_scene.tscn" id="4_it1if"]
+[ext_resource type="Texture2D" uid="uid://dv3b8m1oleltb" path="res://assets/start_normal.png" id="5_e0ppv"]
+[ext_resource type="Texture2D" uid="uid://c6i4byg1fxg0e" path="res://assets/start_hover.png" id="6_stemu"]
+[ext_resource type="Texture2D" uid="uid://cr20jrot1b7ii" path="res://assets/exit_normal.png" id="7_7jqvx"]
+[ext_resource type="Texture2D" uid="uid://cj3xgf04yyl3g" path="res://assets/exit_hover.png" id="8_bv86p"]
 
 [sub_resource type="Animation" id="Animation_as55k"]
 length = 0.001
@@ -62,9 +67,12 @@ _data = {
 script = ExtResource("1_0ide8")
 
 [node name="game_scene" parent="." instance=ExtResource("1_to420")]
+unique_name_in_owner = true
+visible = false
 
 [node name="Camera2D" parent="game_scene" index="2"]
-zoom = Vector2(3, 3)
+position = Vector2(591, 345)
+zoom = Vector2(2, 2)
 
 [node name="object_pool" parent="game_scene" instance=ExtResource("3_32m5m")]
 unique_name_in_owner = true
@@ -76,52 +84,6 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-
-[node name="score" type="Control" parent="CanvasLayer/Control"]
-visible = false
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="global_score" type="Label" parent="CanvasLayer/Control/score"]
-unique_name_in_owner = true
-layout_mode = 0
-offset_right = 47.0
-offset_bottom = 23.0
-text = "global"
-
-[node name="less_than_5" type="Label" parent="CanvasLayer/Control/score"]
-unique_name_in_owner = true
-layout_mode = 0
-offset_top = 19.0
-offset_right = 40.0
-offset_bottom = 42.0
-text = "<5"
-
-[node name="5_to_10" type="Label" parent="CanvasLayer/Control/score"]
-unique_name_in_owner = true
-layout_mode = 0
-offset_top = 37.0
-offset_right = 40.0
-offset_bottom = 60.0
-text = "5-10"
-
-[node name="10_to_20" type="Label" parent="CanvasLayer/Control/score"]
-unique_name_in_owner = true
-layout_mode = 0
-offset_top = 57.0
-offset_right = 42.0
-offset_bottom = 80.0
-text = "10-20"
-
-[node name="more than 20" type="Label" parent="CanvasLayer/Control/score"]
-unique_name_in_owner = true
-layout_mode = 0
-offset_top = 77.0
-offset_right = 40.0
-offset_bottom = 100.0
-text = ">20
-"
 
 [node name="rain_container" type="Control" parent="CanvasLayer/Control"]
 unique_name_in_owner = true
@@ -147,6 +109,7 @@ position = Vector2(2500, 2500)
 position = Vector2(-2500, 2500)
 
 [node name="sliders" type="Control" parent="CanvasLayer/Control"]
+visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -188,6 +151,29 @@ offset_top = -23.0
 offset_right = 181.0
 text = "Tree spawn rate"
 
+[node name="title_scene" parent="CanvasLayer/Control" instance=ExtResource("4_it1if")]
+unique_name_in_owner = true
+
+[node name="start" type="TextureButton" parent="CanvasLayer"]
+unique_name_in_owner = true
+offset_left = 530.0
+offset_top = 361.0
+offset_right = 617.0
+offset_bottom = 376.0
+texture_normal = ExtResource("5_e0ppv")
+texture_pressed = ExtResource("6_stemu")
+texture_hover = ExtResource("6_stemu")
+
+[node name="quit" type="TextureButton" parent="CanvasLayer"]
+unique_name_in_owner = true
+offset_left = 547.0
+offset_top = 403.0
+offset_right = 612.0
+offset_bottom = 417.0
+texture_normal = ExtResource("7_7jqvx")
+texture_pressed = ExtResource("8_bv86p")
+texture_hover = ExtResource("8_bv86p")
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
 libraries = {
@@ -196,5 +182,7 @@ libraries = {
 
 [connection signal="value_changed" from="CanvasLayer/Control/sliders/city_spawn" to="." method="_on_city_spawn_value_changed"]
 [connection signal="value_changed" from="CanvasLayer/Control/sliders/tree_spawn" to="." method="_on_tree_spawn_value_changed"]
+[connection signal="pressed" from="CanvasLayer/start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="CanvasLayer/quit" to="." method="_on_quit_pressed"]
 
 [editable path="game_scene"]

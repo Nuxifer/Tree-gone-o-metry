@@ -3,6 +3,7 @@ extends Node2D
 @onready var tree_label = %tree_label
 @onready var city_label = %city_label
 
+@onready var title_screen = %title_scene
 
 @onready var rain_scene = preload("res://scenes/rain_scene.tscn")
 var animation_player
@@ -51,3 +52,14 @@ func _on_fade_in():
 	print("Rain faded in")
 	%AnimationPlayer.play("fade_in")
 	
+
+
+func _on_start_pressed():
+	title_screen.queue_free()
+	%game_scene.show()
+	%start.hide()
+	%quit.hide()
+
+
+func _on_quit_pressed():
+	get_tree().quit()
