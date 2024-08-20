@@ -17,8 +17,8 @@ var lakes: Array = []  # Track lakes in the game
 var placed_trees: Dictionary = {}
 var placed_settlements: Dictionary = {}
 
-var hut_spawn_chance: float = 0.04  # 4% chance to spawn a hut
-var tree_spawn_chance: float = 0.15  # 15% chance to spawn a tree
+var hut_spawn_chance: float = 0.05  # 4% chance to spawn a hut
+var tree_spawn_chance: float = 0.20  # 15% chance to spawn a tree
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

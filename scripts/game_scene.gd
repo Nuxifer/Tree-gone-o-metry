@@ -57,6 +57,7 @@ func _ready():
 	if camera == null:
 		camera = $Camera2D
 	camera.make_current()
+	camera.set_zoom(Vector2(3,3))
 	Global.spawn_tree.connect(place_tree)
 	Global.spawn_settlement.connect(place_settlement)
 	Global.remove_tree.connect(remove_tree)

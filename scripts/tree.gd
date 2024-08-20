@@ -13,7 +13,9 @@ var growth_factor : int = 1
 
 func on_new_turn():
 	# This function is called when a new turn occurs (i.e., when a new tree is placed)
-	
+	if tree_level <= 0:
+		#print("Warning: Tree at position ", global_position, " has invalid level. Resetting to 1.")
+		tree_level = 1  # Reset to a valid level
 	
 	if tree_level < max_tree_level:
 		tree_level += growth_factor
